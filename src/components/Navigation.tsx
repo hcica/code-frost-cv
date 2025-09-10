@@ -68,9 +68,7 @@ export function Navigation() {
             ))}
           </div>
           
-          <button className="glass-button hidden md:block">
-            Download CV
-          </button>
+          {/* Removed CV download button */}
           
           {/* Mobile menu button */}
           <button className="md:hidden glass-button p-2">

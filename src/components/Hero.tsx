@@ -18,7 +18,7 @@ export function Hero() {
       <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyber-cyan/10 rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-violet/10 rounded-full blur-3xl animate-pulse" />
       
-      <div className="container mx-auto px-4 text-center relative z-10">
+      <div className="container mx-auto px-4 text-center relative z-10 pb-24 sm:pb-32">
         <div className="max-w-4xl mx-auto fade-in">
           {/* Availability Badge */}
           <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-6 border border-cyber-cyan/30">
@@ -45,7 +45,7 @@ export function Hero() {
             </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6 sm:mb-8 z-20 relative">
             <PrimaryCTA 
               variant="cyber" 
               size="lg"
@@ -53,22 +53,11 @@ export function Hero() {
             >
               Get In Touch
             </PrimaryCTA>
-            
-            <PrimaryCTA 
-              variant="outline" 
-              size="lg"
-              onClick={() => window.print()}
-            >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Download CV
-            </PrimaryCTA>
           </div>
         </div>
         
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 glow-pulse">
+        <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 glow-pulse pointer-events-none select-none hidden md:block z-0" aria-hidden="true">
           <div className="flex flex-col items-center gap-2 text-muted-foreground">
             <span className="text-sm">Scroll to explore</span>
             <svg className="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">

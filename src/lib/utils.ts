@@ -6,8 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function obfuscateEmail(email: string): string {
-  const [username, domain] = email.split('@');
-  return `${username} [at] ${domain.replace('.', ' [dot] ')}`;
+  return email;
 }
 
 export function formatDate(date: string | Date): string {

@@ -73,7 +73,7 @@ npm run preview
 
 ## 📄 Exporting PDF
 
-1. **Print to PDF**: Use the "Download CV" button or press `Ctrl+P` (Windows) / `Cmd+P` (Mac)
+1. **Print to PDF**: Press `Ctrl+P` (Windows) / `Cmd+P` (Mac)
 2. **Print Settings**: 
    - Layout: Portrait
    - Paper size: A4
