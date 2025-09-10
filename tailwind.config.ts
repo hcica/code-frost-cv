@@ -17,8 +17,26 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          secondary: "hsl(var(--background-secondary))",
+        },
         foreground: "hsl(var(--foreground))",
+        
+        // Glass Effects
+        "glass-bg": "hsl(var(--glass-bg))",
+        "glass-border": "hsl(var(--glass-border))",
+        "glass-shadow": "hsl(var(--glass-shadow))",
+        
+        // Cyber Accents
+        "cyber-cyan": "hsl(var(--cyber-cyan))",
+        "cyber-cyan-glow": "hsl(var(--cyber-cyan-glow))",
+        "cyber-violet": "hsl(var(--cyber-violet))",
+        "cyber-violet-glow": "hsl(var(--cyber-violet-glow))",
+        "cyber-success": "hsl(var(--cyber-success))",
+        "cyber-warning": "hsl(var(--cyber-warning))",
+        "cyber-danger": "hsl(var(--cyber-danger))",
+        
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -47,16 +65,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
+      },
+      backgroundImage: {
+        "gradient-cyber": "var(--gradient-cyber)",
+        "gradient-glass": "var(--gradient-glass)",
+        "gradient-glow": "var(--gradient-glow)",
+      },
+      boxShadow: {
+        "glass": "var(--shadow-glass)",
+        "glow": "var(--shadow-glow)",
+        "glow-violet": "var(--shadow-glow-violet)",
       },
       borderRadius: {
         lg: "var(--radius)",
