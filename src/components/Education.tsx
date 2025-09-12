@@ -18,13 +18,13 @@ export function Education() {
 
         <div className="max-w-4xl mx-auto">
           {education.map((edu, index) => (
-            <GlassCard key={index} className="slide-up">
+            <GlassCard key={index} hover className="slide-up group">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-cyber-cyan transition-colors">
                     {edu.degree}
                   </h3>
-                  <p className="text-cyber-cyan font-medium">
+                  <p className="text-cyber-cyan font-medium group-hover:text-cyber-violet transition-colors">
                     {edu.institution}
                   </p>
                 </div>

@@ -29,10 +29,10 @@ export function SkillMatrix() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category) => (
-            <GlassCard key={category.title} className="slide-up">
+            <GlassCard key={category.title} hover className="slide-up group">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">{category.icon}</span>
-                <h3 className="text-lg font-semibold text-foreground">
+                <span className="text-2xl group-hover:scale-110 transition-transform">{category.icon}</span>
+                <h3 className="text-lg font-semibold text-foreground group-hover:text-cyber-cyan transition-colors">
                   {category.title}
                 </h3>
               </div>

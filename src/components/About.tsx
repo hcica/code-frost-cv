@@ -18,15 +18,15 @@ export function About() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <GlassCard className="slide-up">
-            <h3 className="text-2xl font-semibold mb-4 cyber-text">Professional Summary</h3>
+          <GlassCard hover className="slide-up group">
+            <h3 className="text-2xl font-semibold mb-4 cyber-text group-hover:text-cyber-violet transition-colors">Professional Summary</h3>
             <p className="text-muted-foreground leading-relaxed">
               {person.summary}
             </p>
           </GlassCard>
 
-          <GlassCard className="slide-up">
-            <h3 className="text-2xl font-semibold mb-4 cyber-text">Professional Development</h3>
+          <GlassCard hover className="slide-up group">
+            <h3 className="text-2xl font-semibold mb-4 cyber-text group-hover:text-cyber-violet transition-colors">Professional Development</h3>
             <div className="space-y-3">
               {professionalDevelopment.map((item, index) => (
                 <div key={index} className="flex items-center gap-3">
@@ -39,8 +39,8 @@ export function About() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <GlassCard className="slide-up">
-            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+          <GlassCard hover className="slide-up group">
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 group-hover:text-cyber-cyan transition-colors">
               <span>🗣️</span>
               Languages
             </h3>
@@ -54,8 +54,8 @@ export function About() {
             </div>
           </GlassCard>
 
-          <GlassCard className="slide-up">
-            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+          <GlassCard hover className="slide-up group">
+            <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 group-hover:text-cyber-cyan transition-colors">
               <span>🎯</span>
               Soft Skills
             </h3>

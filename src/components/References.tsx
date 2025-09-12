@@ -22,16 +22,16 @@ export function References() {
     <section className="py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <GlassCard className="slide-up">
+          <GlassCard hover className="slide-up group">
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className="w-full flex items-center justify-between text-left"
             >
-              <h3 className="text-2xl font-semibold cyber-text">
+              <h3 className="text-2xl font-semibold cyber-text group-hover:text-cyber-violet transition-colors">
                 Professional References
               </h3>
               <svg 
-                className={`w-6 h-6 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                className={`w-6 h-6 transition-transform duration-300 group-hover:text-cyber-cyan group-hover:scale-110 ${isExpanded ? 'rotate-180' : ''}`}
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
