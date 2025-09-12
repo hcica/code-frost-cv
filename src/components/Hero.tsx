@@ -1,6 +1,6 @@
 import { PrimaryCTA } from "./PrimaryCTA";
 import { portfolioContent } from "@/lib/content";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/red-team-bg.jpg";
 
 export function Hero() {
   const { person } = portfolioContent;
