@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b0f14"/>
+      <stop offset="100%" stop-color="#0a0c10"/>
+    </linearGradient>
+    <radialGradient id="glowRed" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ff1a40" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#ff1a40" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ff1a40" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowMagenta" cx="80%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#c700ff" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#c700ff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#c700ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gridStroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff2745"/>
+      <stop offset="100%" stop-color="#b3002d"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glowRed)"/>
+  <rect width="1600" height="900" fill="url(#glowMagenta)"/>
+
+  <!-- Hex grid / circuit pattern -->
+  <g stroke="url(#gridStroke)" stroke-opacity="0.18" fill="none">
+    <g transform="translate(0,0)">
+      <!-- verticals -->
+      <path d="M100 0 V900"/>
+      <path d="M200 0 V900"/>
+      <path d="M300 0 V900"/>
+      <path d="M400 0 V900"/>
+      <path d="M500 0 V900"/>
+      <path d="M600 0 V900"/>
+      <path d="M700 0 V900"/>
+      <path d="M800 0 V900"/>
+      <path d="M900 0 V900"/>
+      <path d="M1000 0 V900"/>
+      <path d="M1100 0 V900"/>
+      <path d="M1200 0 V900"/>
+      <path d="M1300 0 V900"/>
+      <path d="M1400 0 V900"/>
+      <path d="M1500 0 V900"/>
+      <!-- horizontals -->
+      <path d="M0 100 H1600"/>
+      <path d="M0 200 H1600"/>
+      <path d="M0 300 H1600"/>
+      <path d="M0 400 H1600"/>
+      <path d="M0 500 H1600"/>
+      <path d="M0 600 H1600"/>
+      <path d="M0 700 H1600"/>
+      <path d="M0 800 H1600"/>
+    </g>
+  </g>
+
+  <!-- Nodes -->
+  <g fill="#ff214a" fill-opacity="0.85" filter="url(#soft)">
+    <circle cx="260" cy="240" r="3"/>
+    <circle cx="480" cy="160" r="3"/>
+    <circle cx="720" cy="220" r="3"/>
+    <circle cx="1040" cy="180" r="3"/>
+    <circle cx="1240" cy="300" r="3"/>
+    <circle cx="360" cy="440" r="3"/>
+    <circle cx="800" cy="460" r="3"/>
+    <circle cx="1160" cy="520" r="3"/>
+    <circle cx="540" cy="680" r="3"/>
+    <circle cx="980" cy="720" r="3"/>
+  </g>
+
+  <!-- Target reticle -->
+  <g transform="translate(1180,320)">
+    <circle r="90" stroke="#ff214a" stroke-opacity="0.6" fill="none"/>
+    <circle r="60" stroke="#ff214a" stroke-opacity="0.35" fill="none"/>
+    <circle r="30" stroke="#ff214a" stroke-opacity="0.2" fill="none"/>
+    <path d="M-110 0 H110 M0 -110 V110" stroke="#ff214a" stroke-opacity="0.3"/>
+    <circle r="6" fill="#ff214a" fill-opacity="0.9"/>
+  </g>
+
+  <!-- Lock (target asset) -->
+  <g transform="translate(420,560) scale(1.3)" stroke="#ff214a" stroke-width="3" stroke-opacity="0.9" fill="none" filter="url(#soft)">
+    <rect x="-70" y="-20" rx="10" ry="10" width="140" height="100"/>
+    <path d="M-35 -20 v-30 a35 35 0 0 1 70 0 v30"/>
+    <circle cx="0" cy="30" r="8" fill="#ff214a"/>
+    <path d="M0 38 v24"/>
+  </g>
+
+  <!-- Textual code feel (subtle) -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" fill="#ff7a90" fill-opacity="0.28">
+    <text x="90" y="120">nmap -sC -sV target</text>
+    <text x="90" y="140">msfconsole &gt; use exploit/multi/http/...</text>
+    <text x="90" y="160">curl -I https://cv.example.com</text>
+    <text x="90" y="180">hydra -L users.txt -P pass.txt ssh://...</text>
+    <text x="90" y="200">nc -lvnp 4444</text>
+  </g>
+
+  <!-- Framing lines -->
+  <g stroke="#ff214a" stroke-opacity="0.25">
+    <path d="M40 60 H220"/>
+    <path d="M40 60 V200"/>
+    <path d="M1560 840 H1380"/>
+    <path d="M1560 840 V700"/>
+  </g>
+</svg>
+
