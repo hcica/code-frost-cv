@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { id: "hero", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "projects", label: "Projects" },
-  { id: "skills", label: "Skills" },
-  { id: "education", label: "Education" },
-  { id: "contact", label: "Contact" }
+  { id: "hero", label: "Home", href: "/" },
+  { id: "about", label: "About", href: "/#about" },
+  { id: "projects", label: "Projects", href: "/#projects" },
+  { id: "skills", label: "Skills", href: "/#skills" },
+  { id: "education", label: "Education", href: "/#education" },
+  { id: "contact", label: "Contact", href: "/contact" }
 ];
 
 export function Navigation() {
@@ -42,6 +42,14 @@ export function Navigation() {
     }
   };
 
+  const handleNavigation = (item: { id: string; href: string }) => {
+    if (item.href.startsWith('/')) {
+      window.location.href = item.href;
+    } else {
+      scrollToSection(item.id);
+    }
+  };
+
   return (
     <nav className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
@@ -57,7 +65,7 @@ export function Navigation() {
             {navItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                onClick={() => handleNavigation(item)}
                 className={cn(
                   "nav-link",
                   activeSection === item.id && "active"

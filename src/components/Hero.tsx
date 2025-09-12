@@ -49,7 +49,7 @@ export function Hero() {
             <PrimaryCTA 
               variant="cyber" 
               size="lg"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => window.location.href = '/contact'}
             >
               Get In Touch
             </PrimaryCTA>
