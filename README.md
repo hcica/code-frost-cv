@@ -1,6 +1,6 @@
 # Mohammed Thanfees - Cybersecurity Portfolio
 
-A premium glassmorphism-style portfolio website for a cybersecurity specialist, built with React, TypeScript, and Tailwind CSS.
+A premium glassmorph style portfolio website for a cybersecurity specialist, built with React, TypeScript, and Tailwind CSS.
 
 ## 🚀 Features
 
