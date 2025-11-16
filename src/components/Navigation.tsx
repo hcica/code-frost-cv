@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -7,17 +8,40 @@ const navItems = [
   { id: "projects", label: "Projects", href: "/#projects" },
   { id: "skills", label: "Skills", href: "/#skills" },
   { id: "education", label: "Education", href: "/#education" },
+  { id: "social", label: "Social", href: "/social" },
   { id: "contact", label: "Contact", href: "/contact" }
 ];
 
 export function Navigation() {
   const [activeSection, setActiveSection] = useState("hero");
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
+  // Update active section on route changes
   useEffect(() => {
+    const { pathname, hash } = location;
+    if (pathname === "/") {
+      if (hash && hash.startsWith("#")) {
+        setActiveSection(hash.slice(1));
+      } else {
+        setActiveSection("hero");
+      }
+    } else if (pathname === "/social") {
+      setActiveSection("social");
+    } else if (pathname === "/contact") {
+      setActiveSection("contact");
+    } else {
+      setActiveSection("hero");
+    }
+  }, [location]);
+
+  // Scroll handling only on the homepage
+  useEffect(() => {
+    if (location.pathname !== "/") return;
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      
+
       // Update active section based on scroll position
       const sections = navItems.map(item => document.getElementById(item.id));
       const scrollPosition = window.scrollY + 100;
@@ -32,8 +56,10 @@ export function Navigation() {
     };
 
     window.addEventListener("scroll", handleScroll);
+    // Run once on mount to set correct initial state
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);

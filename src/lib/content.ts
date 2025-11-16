@@ -10,7 +10,7 @@ export const portfolioContent = {
       "linkedin": "@thanfees",
       "github": "@Thanfees"
     },
-    "summary": "Hands-on cybersecurity specialist/undergraduate with experience in penetration testing, vulnerability assessment, SOC fundamentals, malware analysis, cryptography, and secure web development. Proficient with Metasploit, Wireshark, Burp Suite, Nmap, Nessus, and more; familiar with ISO 27001:2022 and AWS security. Recognized for strong CTF performance and practical challenge work; passionate about securing digital infrastructure and continuous learning."
+    "summary": "Hands-on cybersecurity undergrad with experience in penetration testing, vulnerability assessment, SOC fundamentals, malware analysis, cryptography, and secure web development."
   },
   "education": [
     {
@@ -107,5 +107,13 @@ export const portfolioContent = {
       "email": "kanishka.y@sliit.lk",
       "phone": "+94 11 754 4801"
     }
-  ]
+  ],
+  "social": {
+    "twitter": "", // e.g., "@yourhandle"; leave empty to hide
+    "linkedinPosts": [
+      // Add LinkedIn embed URLs like:
+      // "https://www.linkedin.com/embed/feed/update/urn:li:activity:1234567890123456789",
+      // "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:1234567890123456789"
+    ]
+  }
 } as const;
