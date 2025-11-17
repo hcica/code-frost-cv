@@ -60,6 +60,7 @@ export interface PortfolioContent {
   skills: Skills;
   projects: Project[];
   research: Research[];
+  ctfAchievements: string[];
   professionalDevelopment: string[];
   languages: Language[];
   softSkills: string[];

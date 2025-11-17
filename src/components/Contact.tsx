@@ -1,12 +1,58 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { GlassCard } from "./GlassCard";
 import { PrimaryCTA } from "./PrimaryCTA";
 import { portfolioContent } from "@/lib/content";
 import { obfuscateEmail } from "@/lib/utils";
 
+const typingMessages = [
+  "Let's secure your stack together.",
+  "Need a penetration test? Let's talk.",
+  "Incident response on your mind?",
+  "Ship features safely with a security review.",
+  "Zero trust roadmap? I'm here to help."
+];
+
 export function Contact() {
   const { person } = portfolioContent;
   const [showEmail, setShowEmail] = useState(false);
+  const [messageIndex, setMessageIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const currentMessage = useMemo(() => typingMessages[messageIndex], [messageIndex]);
+  const displayedText = useMemo(() => currentMessage.slice(0, charIndex), [currentMessage, charIndex]);
+
+  useEffect(() => {
+    const atEnd = charIndex === currentMessage.length;
+    const atStart = charIndex === 0;
+
+    const delay = !isDeleting && atEnd
+      ? 12000 // hold full message for 12s before deleting
+      : isDeleting && atStart
+        ? 600
+        : isDeleting
+          ? 40
+          : 80;
+
+    const timer = window.setTimeout(() => {
+      if (!isDeleting) {
+        if (!atEnd) {
+          setCharIndex((prev) => prev + 1);
+        } else {
+          setIsDeleting(true);
+        }
+      } else {
+        if (!atStart) {
+          setCharIndex((prev) => Math.max(0, prev - 1));
+        } else {
+          setIsDeleting(false);
+          setMessageIndex((prev) => (prev + 1) % typingMessages.length);
+        }
+      }
+    }, delay);
+
+    return () => window.clearTimeout(timer);
+  }, [charIndex, currentMessage.length, currentMessage, isDeleting]);
 
   const handleEmailClick = () => {
     if (showEmail) {
@@ -23,9 +69,10 @@ export function Contact() {
           <h2 className="text-4xl font-bold mb-4">
             Get In <span className="cyber-text">Touch</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Ready to secure your digital infrastructure? Let's discuss your cybersecurity needs.
-          </p>
+          <div className="flex items-center justify-center gap-2 text-lg text-cyber-cyan font-mono max-w-2xl mx-auto">
+            <span>{displayedText}</span>
+            <span className="inline-block w-2 h-6 bg-cyber-cyan animate-pulse rounded-sm" aria-hidden="true" />
+          </div>
         </div>
 
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">

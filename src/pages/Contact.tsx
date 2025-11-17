@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigation } from "@/components/Navigation";
 import { GlassCard } from "@/components/GlassCard";
 import { PrimaryCTA } from "@/components/PrimaryCTA";
 import { portfolioContent } from "@/lib/content";
@@ -9,8 +10,6 @@ export function ContactPage() {
   const { person } = portfolioContent;
   const { toast } = useToast();
   const [showEmail, setShowEmail] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [webhookUrl, setWebhookUrl] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,7 +35,7 @@ export function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: "Missing Information",
@@ -46,50 +45,7 @@ export function ContactPage() {
       return;
     }
 
-    if (webhookUrl) {
-      // Use Zapier webhook if provided
-      setIsLoading(true);
-      
-      try {
-        await fetch(webhookUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          mode: "no-cors",
-          body: JSON.stringify({
-            ...formData,
-            timestamp: new Date().toISOString(),
-            triggered_from: window.location.origin,
-          }),
-        });
-
-        toast({
-          title: "Message Sent!",
-          description: "Your message has been sent successfully. I'll get back to you soon.",
-        });
-        
-        // Reset form
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-          company: ""
-        });
-      } catch (error) {
-        console.error("Error sending message:", error);
-        toast({
-          title: "Error",
-          description: "Failed to send message. Please try again or contact me directly.",
-          variant: "destructive",
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      // Fallback to mailto
-      const emailBody = `Name: ${formData.name}
+    const emailBody = `Name: ${formData.name}
 Email: ${formData.email}
 Company: ${formData.company || 'Not provided'}
 Subject: ${formData.subject || 'Contact Form Submission'}
@@ -97,19 +53,20 @@ Subject: ${formData.subject || 'Contact Form Submission'}
 Message:
 ${formData.message}`;
 
-      const mailtoLink = `mailto:${person.contacts.email}?subject=${encodeURIComponent(formData.subject || 'Contact Form Submission')}&body=${encodeURIComponent(emailBody)}`;
-      window.location.href = mailtoLink;
-      
-      toast({
-        title: "Opening Email Client",
-        description: "Your email client should open with the message pre-filled.",
-      });
-    }
+    const mailtoLink = `mailto:${person.contacts.email}?subject=${encodeURIComponent(formData.subject || 'Contact Form Submission')}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = mailtoLink;
+
+    toast({
+      title: "Opening Email Client",
+      description: "Your email client should open with the message pre-filled.",
+    });
   };
 
   return (
-    <div className="min-h-screen pt-20">
-      <div className="container mx-auto px-4 py-20">
+    <div className="min-h-screen bg-background">
+      <Navigation />
+
+      <div className="container mx-auto px-4 pt-28 pb-20">
         <div className="text-center mb-12 fade-in">
           <h1 className="text-5xl font-bold mb-4">
             Get In <span className="cyber-text">Touch</span>
@@ -204,43 +161,14 @@ ${formData.message}`;
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-foreground mb-2">
-                  Zapier Webhook URL (Optional)
-                </label>
-                <input
-                  type="url"
-                  value={webhookUrl}
-                  onChange={(e) => setWebhookUrl(e.target.value)}
-                  className="w-full px-4 py-3 glass-card bg-glass-bg/60 border border-glass-border/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyber-cyan focus:border-transparent transition-all"
-                  placeholder="https://hooks.zapier.com/hooks/catch/..."
-                />
-                <p className="text-xs text-muted-foreground mt-1">
-                  Optional: Add your Zapier webhook URL to receive form submissions directly in your preferred app.
-                </p>
-              </div>
-
               <button 
                 type="submit"
-                disabled={isLoading}
                 className="w-full glass-button border-cyber-cyan/50 text-cyber-cyan hover:bg-cyber-cyan/10 hover:shadow-glow px-8 py-4 text-lg font-medium transition-all duration-300 inline-flex items-center justify-center"
               >
-                {isLoading ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Sending Message...
-                  </>
-                ) : (
-                  <>
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                    Send Message
-                  </>
-                )}
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+                Send Message
               </button>
             </form>
           </GlassCard>

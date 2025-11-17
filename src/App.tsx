@@ -7,7 +7,6 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
 import { ContactPage } from "@/pages/Contact";
-import SocialPage from "@/pages/Social";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +19,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/social" element={<SocialPage />} />
+          {/** Social page removed */}
           <Route path="/vulnerability-disclosure" element={<div className="min-h-screen flex items-center justify-center bg-background"><div className="text-center"><h1 className="text-2xl font-bold mb-4">Vulnerability Disclosure</h1><p className="text-muted-foreground">Security researchers are encouraged to report vulnerabilities responsibly.</p></div></div>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

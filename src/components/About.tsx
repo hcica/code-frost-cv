@@ -3,7 +3,7 @@ import { Tag } from "./Tag";
 import { portfolioContent } from "@/lib/content";
 
 export function About() {
-  const { person, professionalDevelopment, languages, softSkills } = portfolioContent;
+  const { person, ctfAchievements, professionalDevelopment, languages, softSkills } = portfolioContent;
 
   return (
     <section id="about" className="py-20">
@@ -29,6 +29,18 @@ export function About() {
             <h3 className="text-2xl font-semibold mb-4 cyber-text group-hover:text-cyber-violet transition-colors">Professional Development</h3>
             <div className="space-y-3">
               {professionalDevelopment.map((item, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-cyber-cyan rounded-full flex-shrink-0" />
+                  <span className="text-muted-foreground">{item}</span>
+                </div>
+              ))}
+            </div>
+          </GlassCard>
+
+          <GlassCard hover className="slide-up group lg:col-span-2">
+            <h3 className="text-2xl font-semibold mb-4 cyber-text group-hover:text-cyber-violet transition-colors">CTF Competitions</h3>
+            <div className="space-y-3">
+              {ctfAchievements.map((item, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-cyber-cyan rounded-full flex-shrink-0" />
                   <span className="text-muted-foreground">{item}</span>

@@ -10,7 +10,7 @@ export const portfolioContent = {
       "linkedin": "@thanfees",
       "github": "@Thanfees"
     },
-    "summary": "Hands-on cybersecurity undergrad with experience in penetration testing, vulnerability assessment, SOC fundamentals, malware analysis, cryptography, and secure web development."
+    "summary": "Offensive security practitioner focused on web and app pentesting, adversary emulation, and exploit-driven bug bounty work. Combines deep recon, custom tooling, and exploit development to surface high-impact vulnerabilities before attackers do. Delivers concise remediation guidance and partners with engineering to harden modern attack surfaces."
   },
   "education": [
     {
@@ -25,7 +25,7 @@ export const portfolioContent = {
     "web": ["React.js", "PHP", "HTML", "CSS"],
     "databases": ["MySQL", "SQL", "OracleSQL"],
     "operatingSystems": ["Linux", "macOS", "Windows", "Android"],
-    "versionControl": ["GitHub", "Git"],
+    "versionControl": ["GitHub", "Git", "Jenkins"],
     "securityTools": ["Metasploit", "VirusTotal", "Any.run", "Wireshark", "Ghidra", "Burp Suite", "Splunk", "Nmap", "GDB", "Nessus", "Nuclei", "OWASP ZAP", "Amass"],
     "expertise": ["Penetration Testing", "Data Protection & Privacy", "Malware Analysis & Prevention", "Cybersecurity Frameworks"]
   },
@@ -74,8 +74,12 @@ export const portfolioContent = {
       "tags": ["Security", "AI", "Malware"]
     }
   ],
+  "ctfAchievements": [
+    "1st Runner-Up at the Cyber Rush CodeJam 2024 (University of Moratuwa) 🥈",
+    "1st Runner-Up at CYPHER 3.0 CTF (HashX) 2025 (General Sir John Kotelawala Defence University Inter-University) 🥈"
+   
+  ],
   "professionalDevelopment": [
-    "Real-time CTF Competitions",
     "TryHackMe Rooms",
     "HackTheBox Rooms",
     "Bug Bounty Programs",
@@ -109,11 +113,8 @@ export const portfolioContent = {
     }
   ],
   "social": {
-    "twitter": "", // e.g., "@yourhandle"; leave empty to hide
-    "linkedinPosts": [
-      // Add LinkedIn embed URLs like:
-      // "https://www.linkedin.com/embed/feed/update/urn:li:activity:1234567890123456789",
-      // "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:1234567890123456789"
-    ]
+    // Social feed page removed; keeping structure in case of future use
+    "twitter": "@Thanfees_",
+    "linkedinPosts": []
   }
 } as const;
