@@ -1,162 +1,142 @@
-import { useEffect, useMemo, useState } from "react";
-import { PrimaryCTA } from "./PrimaryCTA";
-import { portfolioContent } from "@/lib/content";
-import heroBg from "@/assets/red-team-bg.jpg";
+import { personalInfo } from "../data/portfolio";
 
-const stoicQuotes = [
-  { text: "You have power over your mind—not outside events. Realize this, and you will find strength.", author: "Marcus Aurelius" },
-  { text: "We suffer more often in imagination than in reality.", author: "Seneca" },
-  { text: "The impediment to action advances action. What stands in the way becomes the way.", author: "Marcus Aurelius" },
-  { text: "Wealth consists not in having great possessions, but in having few wants.", author: "Epictetus" },
-  { text: "First say to yourself what you would be; and then do what you have to do.", author: "Epictetus" },
-  { text: "Make the mind tougher by exposing it to adversity.", author: "Robert Greene" },
-  { text: "If it is not right, do not do it; if it is not true, do not say it.", author: "Marcus Aurelius" },
-  { text: "No man is free who is not master of himself.", author: "Epictetus" },
-  { text: "Man conquers the world by conquering himself.", author: "Zeno of Citium" },
-  { text: "Luck is what happens when preparation meets opportunity.", author: "Seneca" },
-  { text: "He suffers more than necessary, who suffers before it is necessary.", author: "Seneca" },
-  { text: "Don't explain your philosophy. Embody it.", author: "Epictetus" },
-  { text: "How long are you going to wait before you demand the best for yourself?", author: "Epictetus" },
-  { text: "We should always be asking ourselves: Is this something that is, or is not, in my control?", author: "Epictetus" },
-  { text: "Waste no more time arguing what a good man should be. Be one.", author: "Marcus Aurelius" },
-  { text: "Never outshine the master.", author: "Robert Greene" },
-  { text: "Always say less than necessary.", author: "Robert Greene" },
-  { text: "Conceal your intentions.", author: "Robert Greene" },
-  { text: "Reputation is the cornerstone of power.", author: "Robert Greene" },
-  { text: "When asking for help, appeal to people’s self-interest.", author: "Robert Greene" },
-  { text: "Don't demand that things happen as you wish, but wish that they happen as they do, and you will go on well.", author: "Epictetus" },
-  { text: "Sometimes even to live is an act of courage.", author: "Seneca" },
-  { text: "No great thing is created suddenly.", author: "Epictetus" },
-  { text: "Difficulties strengthen the mind, as labor does the body.", author: "Seneca" },
-  { text: "A gem cannot be polished without friction, nor a man perfected without trials.", author: "Seneca" },
-  { text: "Self-control is strength. Right thought is mastery. Calmness is power.", author: "James Allen" },
-  { text: "Fate leads the willing, and drags along the unwilling.", author: "Seneca" },
-  { text: "Be tolerant with others and strict with yourself.", author: "Marcus Aurelius" },
-  { text: "The best revenge is to be unlike your enemy.", author: "Marcus Aurelius" },
-  { text: "If you want to improve, be content to be thought foolish and stupid.", author: "Epictetus" },
-  { text: "It is not the man who has too little that is poor, but the one who hankers after more.", author: "Seneca" },
-  { text: "Begin at once to live, and count each separate day as a separate life.", author: "Seneca" },
-  { text: "A man who fears suffering is already suffering from what he fears.", author: "Michel de Montaigne" },
-  { text: "Anger, if not restrained, is more hurtful than the injury that provokes it.", author: "Seneca" },
-  { text: "Think of yourself as dead. You have lived your life. Now take what's left and live it properly.", author: "Marcus Aurelius" },
-  { text: "The whole future lies in uncertainty: live immediately.", author: "Seneca" },
-  { text: "The more we value things outside our control, the less control we have.", author: "Epictetus" },
-  { text: "Only the educated are free.", author: "Epictetus" },
-  { text: "Practice yourself, for heaven's sake, in little things; and thence proceed to greater.", author: "Epictetus" },
-  { text: "Dwell on the beauty of life. Watch the stars, and see yourself running with them.", author: "Marcus Aurelius" },
-  { text: "The soul becomes dyed with the color of its thoughts.", author: "Marcus Aurelius" },
-  { text: "Seek not the good in external things; seek it in yourselves.", author: "Epictetus" },
-  { text: "Receive without pride, let go without attachment.", author: "Marcus Aurelius" },
-  { text: "Do not disturb yourself by picturing your life as a whole.", author: "Marcus Aurelius" },
-  { text: "If anyone tells you that a certain person speaks ill of you, do not make excuses but answer: he was ignorant of my other faults.", author: "Epictetus" },
-  { text: "We are more often frightened than hurt; and we suffer more from imagination than from reality.", author: "Seneca" },
-  { text: "What injures the hive injures the bee.", author: "Marcus Aurelius" },
-  { text: "When jarred, unavoidably, revert at once to yourself.", author: "Marcus Aurelius" }
-];
-
-export function Hero() {
-  const { person } = portfolioContent;
-  const [quoteIndex, setQuoteIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const currentQuote = useMemo(() => stoicQuotes[quoteIndex], [quoteIndex]);
-  const displayedQuote = useMemo(() => currentQuote.text.slice(0, charIndex), [currentQuote.text, charIndex]);
-
-  useEffect(() => {
-    const atEnd = charIndex === currentQuote.text.length;
-    const atStart = charIndex === 0;
-
-    const delay = !isDeleting && atEnd
-      ? 12000 // hold full quote for 12s
-      : isDeleting && atStart
-        ? 600
-        : isDeleting
-          ? 40
-          : 80;
-
-    const timer = window.setTimeout(() => {
-      if (!isDeleting) {
-        if (!atEnd) {
-          setCharIndex((prev) => prev + 1);
-        } else {
-          setIsDeleting(true);
-        }
-      } else {
-        if (!atStart) {
-          setCharIndex((prev) => Math.max(0, prev - 1));
-        } else {
-          setIsDeleting(false);
-          setQuoteIndex((prev) => (prev + 1) % stoicQuotes.length);
-        }
-      }
-    }, delay);
-
-    return () => window.clearTimeout(timer);
-  }, [charIndex, currentQuote.text, isDeleting]);
-
+export default function Hero() {
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBg})` }}
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0f1e]"
+    >
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-20"
+        style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/85 to-background/95 backdrop-blur-[2px]" />
-      
-      {/* Floating Elements */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyber-cyan/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-violet/10 rounded-full blur-3xl animate-pulse" />
-      
-      <div className="container mx-auto px-4 text-center relative z-10 pb-24 sm:pb-32">
-        <div className="max-w-4xl mx-auto fade-in">
-          {/* Availability Badge */}
-          <div className="inline-flex items-center gap-2 glass-card px-4 py-2 mb-6 border border-cyber-cyan/30">
-            <div className="w-2 h-2 bg-cyber-success rounded-full animate-pulse" />
-            <span className="text-sm text-muted-foreground">Available for Security Opportunities</span>
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-slate-50 drop-shadow-lg">
-            <span className="block">{person.name}</span>
-            <span className="cyber-text text-cyber-cyan">{person.title.split('|')[0].trim()}</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-slate-100/90 mb-8 max-w-3xl mx-auto transition-opacity duration-500">
-            “{displayedQuote}”
-            <span className="inline-block w-2 h-6 bg-cyber-cyan animate-pulse rounded-sm align-middle ml-1" aria-hidden="true" />
-            <span className="text-cyber-cyan block mt-2">— {currentQuote.author}</span>
-          </p>
-          
-          <div className="flex items-center justify-center gap-4 mb-12 text-slate-200">
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span>{person.location}</span>
+
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0f1e]/60 via-transparent to-[#0a0f1e]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/20 via-transparent to-blue-900/20" />
+
+      {/* Animated grid */}
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(6,182,212,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(6,182,212,0.3) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Glow orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
+
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        {/* Badge */}
+        {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-sm font-medium mb-8 backdrop-blur-sm">
+          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+          Available for opportunities
+        </div> */}
+
+        {/* Avatar */}
+        <div className="flex justify-center mb-8">
+          <div className="relative">
+            <div className="w-28 h-28 rounded-2xl bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 p-0.5">
+              <div className="w-full h-full rounded-2xl bg-[#0d1428] flex items-center justify-center text-4xl font-bold text-white">
+                MT
+              </div>
             </div>
+            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-400 rounded-full border-2 border-[#0a0f1e]" />
           </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6 sm:mb-8 z-20 relative">
-            <PrimaryCTA 
-              variant="cyber" 
-              size="lg"
-              onClick={() => window.location.href = '/contact'}
+        </div>
+
+        {/* Name & Title */}
+        <h1 className="text-5xl md:text-7xl font-black text-white mb-4 tracking-tight leading-none">
+          <span className="block">{personalInfo.name}</span>
+        </h1>
+
+        <div className="flex flex-wrap justify-center gap-2 mb-6">
+          {["DevOps", "DevSecOps", "Security Engineering"].map((tag) => (
+            <span
+              key={tag}
+              className="px-3 py-1 rounded-full bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 text-cyan-300 text-sm font-medium"
             >
-              Get In Touch
-            </PrimaryCTA>
-          </div>
+              {tag}
+            </span>
+          ))}
         </div>
-        
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 glow-pulse pointer-events-none select-none hidden md:block z-0" aria-hidden="true">
-          <div className="flex flex-col items-center gap-2 text-muted-foreground">
-            <span className="text-sm">Scroll to explore</span>
-            <svg className="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+
+        <p className="text-xl md:text-2xl font-light text-slate-300 mb-4 max-w-2xl mx-auto">
+          {personalInfo.tagline}
+        </p>
+
+        <p className="text-slate-400 max-w-3xl mx-auto leading-relaxed mb-10 text-base md:text-lg">
+          {personalInfo.summary}
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <a
+            href="#projects"
+            className="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold hover:opacity-90 hover:scale-105 transition-all duration-200 shadow-lg shadow-cyan-500/25"
+          >
+            View My Work
+          </a>
+          <a
+            href="#contact"
+            className="px-8 py-4 rounded-xl border border-slate-600 text-slate-300 font-semibold hover:border-cyan-500/50 hover:text-white hover:bg-white/5 transition-all duration-200"
+          >
+            Get in Touch
+          </a>
+          <a
+            href="https://github.com/Thanfees"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 rounded-xl border border-slate-600 text-slate-300 font-semibold hover:border-purple-500/50 hover:text-white hover:bg-white/5 transition-all duration-200 flex items-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
             </svg>
-          </div>
+            GitHub
+          </a>
         </div>
+
+        {/* Social Links Row */}
+        <div className="flex justify-center gap-6 text-slate-500 text-sm">
+          <a
+            href={`mailto:${personalInfo.email}`}
+            className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            </svg>
+            {personalInfo.email}
+          </a>
+          <a
+            href={personalInfo.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-cyan-400 transition-colors"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+            LinkedIn
+          </a>
+          <span className="flex items-center gap-2">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+            </svg>
+            {personalInfo.phone}
+          </span>
+        </div>
+
+        {/* Scroll indicator */}
+        {/* <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-600">
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
+          <div className="w-5 h-8 rounded-full border border-slate-700 flex items-start justify-center p-1">
+            <div className="w-1 h-2 bg-cyan-400 rounded-full animate-bounce" />
+          </div>
+        </div> */}
       </div>
     </section>
   );

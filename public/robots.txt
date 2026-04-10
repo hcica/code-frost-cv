@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://thanfees.dev/sitemap.xml
-
-# Security files
-Allow: /.well-known/security.txt
-Allow: /.well-known/pgpkey.txt
